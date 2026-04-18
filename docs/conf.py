@@ -136,7 +136,6 @@ exclude_patterns = [
     "LICENSE.md",
     "REFERENCES.md",
     "SUPPORT.md",
-    "checklist.md",
     "setup.md",
 ]
 

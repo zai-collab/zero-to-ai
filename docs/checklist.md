@@ -1,3 +1,7 @@
+---
+orphan: true
+---
+
 # AI/ML Learning Checklist ✅
 
 > Use this as a progress tracker after you read `MASTER_STUDY_GUIDE.md`.
