@@ -75,14 +75,14 @@
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": {{ page_title|tojson }},
-  "url": {{ structured_page_url|tojson }},
-  "description": {{ page_description|striptags|tojson }},
+  "name": {{ page_title|default("")|tojson }},
+  "url": {{ structured_page_url|default("")|tojson }},
+  "description": {{ page_description|striptags|default("")|tojson }},
   "inLanguage": "en",
   "isPartOf": {
     "@type": "WebSite",
     "name": {{ site_name|default(project)|tojson }},
-    "url": {{ site_url|tojson }}
+    "url": {{ site_url|default("")|tojson }}
   },
   "about": [
     "Artificial intelligence",
@@ -92,7 +92,7 @@
   ],
   "primaryImageOfPage": {
     "@type": "ImageObject",
-    "url": {{ social_image|tojson }}
+    "url": {{ social_image|default("")|tojson }}
   },
   "breadcrumb": {
     "@id": {{ (structured_page_url ~ "#breadcrumb")|tojson }}
@@ -122,8 +122,8 @@
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": {{ site_name|default(project)|tojson }},
-  "url": {{ site_url|tojson }},
-  "description": {{ page_description|striptags|tojson }},
+  "url": {{ site_url|default("")|tojson }},
+  "description": {{ page_description|striptags|default("")|tojson }},
   "about": [
     "Artificial intelligence course",
     "Machine learning curriculum",
@@ -132,8 +132,8 @@
   ],
   "publisher": {
     "@type": "Person",
-    "name": {{ author|tojson }},
-    "url": {{ author_profile_url|tojson }},
+    "name": {{ author|default("")|tojson }},
+    "url": {{ author_profile_url|default("")|tojson }},
     "sameAs": {{ same_as_links|default([repo_url_value, author_profile_url], true)|tojson }}
   }
 }
@@ -142,10 +142,10 @@
 {
   "@context": "https://schema.org",
   "@type": "Person",
-  "name": {{ author|tojson }},
-  "url": {{ author_profile_url|tojson }},
+  "name": {{ author|default("")|tojson }},
+  "url": {{ author_profile_url|default("")|tojson }},
   "sameAs": {{ same_as_links|default([repo_url_value, author_profile_url], true)|tojson }},
-  "publishingPrinciples": {{ repo_url_value|tojson }}
+  "publishingPrinciples": {{ repo_url_value|default("")|tojson }}
 }
 </script>
 {% endif %}
