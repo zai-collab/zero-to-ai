@@ -40,7 +40,9 @@ async function getSidebar(page) {
 }
 
 async function getSectionRootItem(sidebar) {
-  const rootItem = sidebar.locator(`li:has(> button[data-href="${SECTION_PATH}"])`).first();
+  const rootItem = sidebar
+    .locator(`li:has(> button[data-href="${SECTION_PATH}"]), li:has(> a[href="${SECTION_PATH}"])`)
+    .first();
 
   if ((await rootItem.count()) === 0) {
     throw new Error(`Could not find sidebar section for ${SECTION_PATH}`);
@@ -54,6 +56,16 @@ async function expandSidebarSection(page) {
   const sidebar = await getSidebar(page);
   const rootItem = await getSectionRootItem(sidebar);
   const rootButton = rootItem.locator(`:scope > button[data-href="${SECTION_PATH}"]`).first();
+  const rootLink = rootItem.locator(`:scope > a[href="${SECTION_PATH}"]`).first();
+
+  if ((await rootButton.count()) === 0) {
+    if ((await rootLink.count()) === 0) {
+      throw new Error(`Sidebar section for ${SECTION_PATH} has no clickable root control`);
+    }
+
+    await rootLink.waitFor({ state: 'visible', timeout: 15_000 });
+    return rootItem;
+  }
 
   const isRootOpen = await rootButton.evaluate((button) => button.closest('li')?.classList.contains('open'));
 
